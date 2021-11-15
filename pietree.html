@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script data-require="d3@3.5.3" data-semver="3.5.3" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.js"></script>
+    <style>
+        path.link {
+            fill: none;
+            stroke-width: 5px;
+        }
+
+        svg text {
+            font-family: Roboto, Arial;
+        }
+
+        .selected {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<script>
+    var red = "#f5696d";
+    var green = "#40bc96";
+    var orange = "#fabd57";
+    window.json = {
+        "health": [{
+            "value": 60
+        }, {
+            "value": 10
+        }, {
+            "value": 30
+        }],
+        "color": orange,
+        "children": [{
+            "health": [{
+                "value": 60
+            }, {
+                "value": 20
+            }, {
+                "value": 20
+            }],
+            "color": green
+        }, {
+            "health": [{
+                "value": 40
+            }, {
+                "value": 30
+            }, {
+                "value": 30
+            }],
+            "color": orange
+        }]
+    };
+
+    var w = 100;
+    var h = 60;
+    var i = 0;
+    var root;
+
+    var tree = d3.layout.tree()
+        .nodeSize([w + 10, h + 20])
+        .separation(function(a, b) {
+            return (a.parent == b.parent ? 1 : 1.5);
+        });
+
+    var diagonal = d3.svg.diagonal()
+        .projection(function(d) {
+            return [d.x, d.y];
+        });
+
+    var vis = d3.select("body").append("svg:svg")
+        .attr("width", 500)
+        .attr("height", 500)
+        .append("svg:g")
+        .attr("transform", "translate(" + 250 + "," + 30 + ")");
+
+    root = window.json;
+    root.x0 = 0;
+    root.y0 = 0;
+
+    function toggleAll(d) {
+        if (d.children) {
+            d.children.forEach(toggleAll);
+            toggle(d);
+        }
+    }
+
+    var arc = d3.svg.arc()
+        .outerRadius(30)
+        .innerRadius(0);
+
+    var pie = d3.layout.pie()
+        .value(function(d) {
+            return d.value;
+        })
+        .sort(null);
+
+    var color = d3.scale.ordinal()
+        .range(['#40bc96', '#fabd57', '#f5696d']);
+
+
+    function drawPie(d) {
+
+        d3.select(this)
+            .selectAll('path')
+            .data(pie(d.health))
+            .enter()
+            .append('path')
+            .attr('d', arc)
+            .attr('fill', function(d, i) {
+                return color(i);
+            });
+    }
+
+    update(root);
+
+    function update(source) {
+        var duration = d3.event && d3.event.altKey ? 5000 : 500;
+
+        // Compute the new tree layout.
+        var nodes = tree.nodes(root).reverse();
+
+        // Update the nodes…
+        var node = vis.selectAll("g.node")
+            .data(nodes, function(d) {
+                return d.id || (d.id = ++i);
+            });
+
+        // Enter any new nodes at the parent's previous position.
+        var nodeEnter = node.enter().append("svg:g")
+            .attr("class", "node")
+            .attr("transform", function(d) {
+                return "translate(" + source.x0 + "," + source.y0 + ")";
+            });
+
+        nodeEnter
+            .each(drawPie);
+
+        // Transition nodes to their new position.
+        var nodeUpdate = node.transition()
+            .duration(duration)
+            .attr("transform", function(d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            });
+
+        // Update the links…
+        var link = vis.selectAll("path.link")
+            .data(tree.links(nodes), function(d) {
+                return d.target.id;
+            });
+
+        // Enter any new links at the parent's previous position.
+        link.enter().insert("svg:path", "g")
+            .attr("class", "link")
+            .style("stroke-opacity", 0.4)
+            .style("stroke", function(d) {
+                return d.target.color;
+            })
+            .attr("d", function(d) {
+                var o = {
+                    x: source.x0,
+                    y: source.y0
+                };
+                return diagonal({
+                    source: o,
+                    target: o
+                });
+            })
+            .transition()
+            .duration(duration)
+            .attr("d", diagonal);
+
+        // Stash the old positions for transition.
+        nodes.forEach(function(d) {
+            d.x0 = d.x;
+            d.y0 = d.y;
+        });
+    }
+</script>
+</body>
+
+</html>
