@@ -21,36 +21,29 @@
 
 <body>
 <script>
-    var red = "#f5696d";
-    var green = "#40bc96";
-    var orange = "#fabd57";
+    var blue = "#99CCFF";
+    var brown = "#663333";
     window.json = {
         "health": [{
             "value": 60
         }, {
-            "value": 10
-        }, {
-            "value": 30
+            "value": 40
         }],
-        "color": orange,
+        "color": brown,
         "children": [{
             "health": [{
-                "value": 60
-            }, {
-                "value": 20
+                "value": 80
             }, {
                 "value": 20
             }],
-            "color": green
+            "color": brown,
         }, {
             "health": [{
-                "value": 40
+                "value": 50
             }, {
-                "value": 30
-            }, {
-                "value": 30
+                "value": 50
             }],
-            "color": orange
+            "color": brown
         }]
     };
 
@@ -98,7 +91,7 @@
         .sort(null);
 
     var color = d3.scale.ordinal()
-        .range(['#40bc96', '#fabd57', '#f5696d']);
+        .range(["#99CCFF", "#663333"]);
 
 
     function drawPie(d) {

@@ -165,18 +165,18 @@ const flare = {
     "assessed": 138374
 };
 
-// var flare;
-// window.onload = function(){
-//     console.log("Hello World!");
-//     loadData("heirarchy.json");
-// };
-//
-// function loadData(path) {
-//     d3.json(path).then(function (data) {
-//         console.log(data);
-//         flare = data;
-//     });
-// }
+    // var flare;
+    // window.onload = function(){
+    //     console.log("Hello World!");
+    //     loadData("heirarchy.json");
+    // };
+    //
+    // function loadData(path) {
+    //     d3.json(path).then(function (data) {
+    //         console.log(data);
+    //         flare = data;
+    //     });
+    // }
 
 root = flare;
 root.x0 = height / 2;
@@ -224,7 +224,7 @@ function update(source) {
             return d.children || d._children ? "end" : "start";
         })
         .text(function(d) {
-            //return d.name;
+            return d.name;
         })
         .style("fill-opacity", 1e-6);
 
