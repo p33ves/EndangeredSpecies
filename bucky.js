@@ -3,8 +3,9 @@ const width = 960,
 
 const velocity = [0.01, 0.005],
   t0 = Date.now();
-
+console.log(d3.geo);
 const projection = d3.geoOrthographic().scale(height / 2 - 10);
+// const projection = d3.geo.orthographic().scale(height / 2 - 10);
 
 const canvas = d3
   .select("#body")

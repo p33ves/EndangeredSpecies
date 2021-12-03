@@ -9,13 +9,17 @@ function Plot() {
 }
 
 function BuildBar(id, chartData, options, level) {
-  //d3.selectAll("#" + id + " .innerCont").remove();
-  //$("#" + id).append(chartInnerDiv);
   chart = d3.select("#" + id + " .innerCont");
 
   var margin = { top: 50, right: 10, bottom: 30, left: 50 },
-    width = $(chart[0]).outerWidth() - margin.left - margin.right,
-    height = $(chart[0]).outerHeight() - margin.top - margin.bottom;
+    width =
+      $($("#" + id + " .innerCont")[0]).outerWidth() -
+      margin.left -
+      margin.right,
+    height =
+      $($("#" + id + " .innerCont")[0]).outerHeight() -
+      margin.top -
+      margin.bottom;
   var xVarName;
   var yVarName = options[0].yaxis;
 
@@ -37,9 +41,9 @@ function BuildBar(id, chartData, options, level) {
     return el.caption;
   });
 
-  var x = d3.scale.ordinal().domain(xAry).rangeRoundBands([0, width], 0.5);
-  var y = d3.scale
-    .linear()
+  var x = d3.scaleBand().domain(xAry).rangeRound([0, width], 0.5);
+  var y = d3
+    .scaleLinear()
     .domain([
       0,
       d3.max(runningData, function (d) {
@@ -47,7 +51,7 @@ function BuildBar(id, chartData, options, level) {
       }),
     ])
     .range([height, 0]);
-  var rcolor = d3.scale.ordinal().range(runningColors);
+  var rcolor = d3.scaleOrdinal().range(runningColors);
 
   chart = chart
     .append("svg") //append svg element inside #chart
@@ -59,17 +63,14 @@ function BuildBar(id, chartData, options, level) {
     .data(runningData)
     .enter()
     .append("g")
-    //.attr("filter", "url(#dropshadow)")
     .attr("transform", function (d) {
       return "translate(" + x(d[xVarName]) + ", 0)";
     });
 
   var ctrtxt = 0;
-  var xAxis = d3.svg
-    .axis()
+  var xAxis = d3
+    .axisBottom()
     .scale(x)
-    //.orient("bottom").ticks(xAry.length).tickValues(capAry);  //orient bottom because x-axis tick labels will appear on the
-    .orient("bottom")
     .ticks(xAry.length)
     .tickFormat(function (d) {
       if (level == 0) {
@@ -82,7 +83,7 @@ function BuildBar(id, chartData, options, level) {
       }
     });
 
-  var yAxis = d3.svg.axis().scale(y).orient("left").ticks(5); //orient left because y-axis tick labels will appear on the left side of the axis.
+  var yAxis = d3.axisLeft().scale(y).ticks(5); //orient left because y-axis tick labels will appear on the left side of the axis.
 
   bar
     .append("rect")
@@ -90,38 +91,38 @@ function BuildBar(id, chartData, options, level) {
       return y(d.Total) + margin.top - 15;
     })
     .attr("x", function (d) {
-      return margin.left;
+      return margin.left + x.bandwidth() / 4;
     })
     .on("mouseenter", function (d) {
       d3.select(this)
         .attr("stroke", "white")
         .attr("stroke-width", 1)
-        .attr("height", function (d) {
-          return height - y(d[yVarName]) + 5;
-        })
         .attr("y", function (d) {
           return y(d.Total) + margin.top - 20;
         })
-        .attr("width", x.rangeBand() + 10)
-        .attr("x", function (d) {
-          return margin.left - 5;
+        .attr("height", function (d) {
+          return height - y(d[yVarName]) + 5;
         })
+        .attr("x", function (d) {
+          return margin.left - 5 + x.bandwidth() / 4;
+        })
+        .attr("width", x.bandwidth() / 2 + 10)
         .transition()
         .duration(200);
     })
     .on("mouseleave", function (d) {
       d3.select(this)
         .attr("stroke", "none")
-        .attr("height", function (d) {
-          return height - y(d[yVarName]);
-        })
         .attr("y", function (d) {
           return y(d[yVarName]) + margin.top - 15;
         })
-        .attr("width", x.rangeBand())
-        .attr("x", function (d) {
-          return margin.left;
+        .attr("height", function (d) {
+          return height - y(d[yVarName]);
         })
+        .attr("x", function (d) {
+          return margin.left + x.bandwidth() / 4;
+        })
+        .attr("width", x.bandwidth() / 2)
         .transition()
         .duration(200);
     })
@@ -151,43 +152,29 @@ function BuildBar(id, chartData, options, level) {
 
   bar
     .selectAll("rect")
+    .transition()
+    .duration(1000)
     .attr("height", function (d) {
       return height - y(d[yVarName]);
     })
-    .transition()
-    .delay(function (d, i) {
-      return i * 300;
-    })
-    .duration(1000)
-    .attr("width", x.rangeBand()) //set width base on range on ordinal data
-    .transition()
-    .delay(function (d, i) {
-      return i * 300;
-    })
-    .duration(1000);
+    .attr("width", x.bandwidth() / 2); //set width base on range on ordinal data;
 
-  bar
-    .selectAll("rect")
-    .style("fill", function (d) {
-      return rcolor(d[xVarName]);
-    })
-    .style("opacity", function (d) {
-      return d["op"];
-    });
-
-  bar
-    .append("text")
-    .attr("x", x.rangeBand() / 2 + margin.left - 10)
-    .attr("y", function (d) {
-      return y(d[yVarName]) + margin.top - 25;
-    })
-    .attr("dy", ".35em")
-    .text(function (d) {
-      return d[yVarName];
-    });
+  //setTimeout( 1000)
+  bar.selectAll("rect").style("fill", function (d) {
+    return rcolor(d[xVarName]);
+  }),
+    bar
+      .append("text")
+      .attr("x", x.bandwidth() / 2 + margin.left - 10)
+      .attr("y", function (d) {
+        return y(d[yVarName]) + margin.top - 25;
+      })
+      .attr("dy", ".35em")
+      .text(function (d) {
+        return d[yVarName];
+      });
 
   bar.append("svg:title").text(function (d) {
-    //return xVarName + ":  " + d["title"] + " \x0A" + yVarName + ":  " + d[yVarName];
     return d["title"] + " (" + d[yVarName] + ")";
   });
 
@@ -218,7 +205,6 @@ function BuildBar(id, chartData, options, level) {
     .attr("y", 6)
     .attr("dy", ".71em")
     .style("text-anchor", "end");
-  //.text("Sales Data");
 
   if (level == 1) {
     chart
