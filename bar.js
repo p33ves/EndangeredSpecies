@@ -4,17 +4,24 @@ $(document).ready(function () {
   Plot();
 });
 function Plot(year = 2002) {
-  TransformChartData(chartData(year), chartOptions);
-  BuildBar("chart", chartData(year), chartOptions);
+  var sortedData = chartData(year).sort(function (a, b) {
+    return (
+      parseFloat(b[chartOptions[0].yaxis]) -
+      parseFloat(a[chartOptions[0].yaxis])
+    );
+  });
 
-  console.log(chartData(year));
+  TransformChartData(sortedData, chartOptions);
+  BuildBar("chart", sortedData, chartOptions);
+
+  console.log("%%%", sortedData);
 }
 
 function BuildBar(id, chartData, options, level) {
   d3.selectAll("#" + id + " svg").remove();
   chart = d3.select("#" + id + " .innerCont");
 
-  var margin = { top: 50, right: 10, bottom: 30, left: 50 },
+  var margin = { top: 50, right: 10, bottom: 100, left: 50 },
     width =
       $($("#" + id + " .innerCont")[0]).outerWidth() -
       margin.left -
@@ -149,9 +156,12 @@ function BuildBar(id, chartData, options, level) {
             parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis])
           );
         });
-        TransformChartData(chartData, options, 1, d[xVarName]);
+
+        console.log("&&&&&", chartData);
         // TransformChartData(nonSortedChart, options, 1, d[xVarName]);
-        BuildBar(id, nonSortedChart, options, 1);
+        // BuildBar(id, nonSortedChart, options, 1);
+        TransformChartData(chartData, options, 1, d[xVarName]);
+        BuildBar(id, chartData, options, 1);
       }
     });
 
@@ -211,7 +221,7 @@ function BuildBar(id, chartData, options, level) {
     .attr("dy", ".71em")
     .style("text-anchor", "end");
 
-  chart.selectAll("text").attr("transform", " translate(10,30) rotate(270)");
+  chart.selectAll("text").attr("transform", " translate(-10,50) rotate(270)");
   chart
     .select(".y.axis")
     .selectAll("text")
@@ -221,7 +231,7 @@ function BuildBar(id, chartData, options, level) {
     chart
       .select(".x.axis")
       .selectAll("text")
-      .attr("transform", " translate(10,30) rotate(210)");
+      .attr("transform", " translate(10,30) rotate(300)");
   }
 }
 
@@ -309,101 +319,14 @@ function TransformChartData(chartData, opts, level, filter) {
 
   runningData = result;
   runningColors = resultColors;
+
+  // chartData = chartData.sort(function (a, b) {
+  //   return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
+  // });
+
+  console.log("****", chartData);
   return;
 }
-
-// var chartData = [
-//   {
-//     Country: "USA",
-//     Model: "Model 1",
-//     Total: 487,
-//   },
-//   {
-//     Country: "USA",
-//     Model: "Model 2",
-//     Total: 185,
-//   },
-//   {
-//     Country: "USA",
-//     Model: "Model 3",
-//     Total: 140,
-//   },
-//   {
-//     Country: "USA",
-//     Model: "Model 4",
-//     Total: 108,
-//   },
-//   {
-//     Country: "USA",
-//     Model: "Model 5",
-//     Total: 26,
-//   },
-//   {
-//     Country: "USA",
-//     Model: "Model 6",
-//     Total: 106,
-//   },
-//   {
-//     Country: "USA",
-//     Model: "Model 7",
-//     Total: 27,
-//   },
-//   {
-//     Country: "USA",
-//     Model: "Model 8",
-//     Total: 44,
-//   },
-//   {
-//     Country: "USA",
-//     Model: "Model 9",
-//     Total: 96,
-//   },
-//   {
-//     Country: "INDIA",
-//     Model: "Model 1",
-//     Total: 411,
-//   },
-//   {
-//     Country: "INDIA",
-//     Model: "Model 2",
-//     Total: 33,
-//   },
-//   {
-//     Country: "INDIA",
-//     Model: "Model 3",
-//     Total: 32,
-//   },
-//   {
-//     Country: "INDIA",
-//     Model: "Model 4",
-//     Total: 29,
-//   },
-//   {
-//     Country: "INDIA",
-//     Model: "Model 5",
-//     Total: 29,
-//   },
-//   {
-//     Country: "CANADA",
-//     Model: "Model 1",
-//     Total: 7,
-//   },
-//   {
-//     Country: "CANADA",
-//     Model: "Model 2",
-//     Total: 20,
-//   },
-//   {
-//     Country: "CANADA",
-//     Model: "Model 3",
-//     Total: 232,
-//   },
-//   {
-//     Country: "CANADA",
-//     Model: "Model 4",
-//     Total: 1117,
-//   },
-// ];
 
 const fullChartData = [
   {
