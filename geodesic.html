@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<meta charset="utf-8" />
 
 <head>
-<style>
-
-    body{
-        display: grid;
-    justify-items: center;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
+  <style>
+    div.layout {
+      display: flex;
+      font-family: "Poppins", sans-serif;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
     }
 
+    body {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    div.disc {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
     /* #body {
         position: absolute;
@@ -19,64 +30,73 @@
     } */
 
     #year input {
-        width: 200px;
+      width: 200px;
     }
 
     #polyhedrontype {
-        position: absolute;
-        top: 50px;
-        left: 20px;
+      position: absolute;
+      top: 50px;
+      left: 20px;
     }
 
-
-    #chart{
-        transform: rotate(
-180deg);
+    #chart {
+      transform: rotate(90deg);
     }
+  </style>
 
-
-</style>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Norican&family=Open+Sans:wght@300;400;600&family=Poppins&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Norican&family=Open+Sans:wght@300;400;600&family=Poppins&display=swap"
+    rel="stylesheet"
+  />
 </head>
 
 <body>
+  <div class="layout">
+    <div class="disc">
+      <div id="year">
+        <input type="range" min="2002" max="2021" value="1" />
+        <output name="year"></output>
+      </div>
 
-<div id="year">
-    <input type="range" min="2002" max="2021" value="1">
-    <output name="year"></output>
-</div>
+      <div id="body"></div>
+    </div>
 
+    <div id="chart" style="height: 600px; width: 600px">
+      <div
+        class="innerCont"
+        style="
+          overflow: auto;
+          top: 100px;
+          left: 400px;
+          height: 91%;
+          width: 100%;
+          overflow: hidden;
+        "
+      ></div>
+    </div>
+  </div>
 
+  <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
+  <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
 
-<div id="body">
-<!--    <input type="radio" name="polyhedron" value="tetrahedron">tetrahedron<br>-->
-<!--    <input type="radio" name="polyhedron" value="icosahedron" checked="checked">icosahedron<br>-->
-<!--    <output name="Title"></output>-->
-</div>
-<div id="chart" style="height:600px;width:600px">
-    <div class="innerCont" style="overflow: auto; top:100px; left: 400px; height:91% ; Width:100% ;overflow: hidden;"></div>
-</div>
-
-
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script> -->
-<!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
-
-<!-- <script src="https://d3js.org/d3.v2.min.js"></script> 
+  <!-- <script src="https://d3js.org/d3.v2.min.js"></script> 
 <script src="https://d3js.org/d3.geodesic.v0.min.js"> -->
-<!-- <script src="d3.min.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script> -->
+  <!-- <script src="d3.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script> -->
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-1.12.4.min.js"
+    charset="utf-8"
+  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
 
-<script src="barv4.js"></script>
-<script src="d3.geodesic.js"></script>
-<script src="versor.js"></script>
-<script src="bucky.js"></script>
-
-
+  <script src="bar.js"></script>
+  <script src="d3.geodesic.js"></script>
+  <script src="versor.js"></script>
+  <script src="bucky.js"></script>
 </body>
+
+

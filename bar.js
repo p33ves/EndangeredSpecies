@@ -149,7 +149,8 @@ function BuildBar(id, chartData, options, level) {
             parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis])
           );
         });
-        TransformChartData(nonSortedChart, options, 1, d[xVarName]);
+        TransformChartData(chartData, options, 1, d[xVarName]);
+        // TransformChartData(nonSortedChart, options, 1, d[xVarName]);
         BuildBar(id, nonSortedChart, options, 1);
       }
     });
@@ -157,7 +158,7 @@ function BuildBar(id, chartData, options, level) {
   bar
     .selectAll("rect")
     .transition()
-    .duration(1000)
+    .duration(000)
     .attr("height", function (d) {
       return height - y(d[yVarName]);
     })
@@ -210,11 +211,11 @@ function BuildBar(id, chartData, options, level) {
     .attr("dy", ".71em")
     .style("text-anchor", "end");
 
-  chart.selectAll("text").attr("transform", " translate(10,30) rotate(180)");
+  chart.selectAll("text").attr("transform", " translate(10,30) rotate(270)");
   chart
     .select(".y.axis")
     .selectAll("text")
-    .attr("transform", " translate(-50,0) rotate(180)");
+    .attr("transform", " translate(-15,-10) rotate(-90)"); // y axis label text
 
   if (level == 1) {
     chart
