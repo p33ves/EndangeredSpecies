@@ -1,17 +1,34 @@
 <!DOCTYPE html>
-<meta charset="UTF-8" http-equiv="encoding">
 <html>
+<meta charset="UTF-8" http-equiv="encoding">
 <head>
+<style>
+#container {
+    position:fixed;
+    top: 12;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+iframe {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+</style>
 </head>
 <body>
 
 <p>Switch between the following views</p>
 <a href="geodesic.html" target="view_iframe">Geodesic</a> -
 <a href="WeightedTree/WeightedTree.html" target="view_iframe">Tree</a> -
-<a href="map.html" target="view_iframe">Map</a>
+<a href="map/map/choroplethMap.html" target="view_iframe">Map</a>
 
+<div id="container">
 <iframe src="geodesic.html" width="100%" height="100%" name="view_iframe"></iframe>
-
+</div>
 </body>
 </html>
 <!-- Vignesh's old index.html
