@@ -2,17 +2,14 @@
 <meta charset="utf-8">
 <style>
 
-    #faces {
+
+    #body {
         position: absolute;
-        top: 20px;
+        top: 60px;
         left: 20px;
     }
 
-    #subdivision {
-
-    }
-
-    #subdivision input {
+    #year input {
         width: 200px;
     }
 
@@ -23,121 +20,21 @@
     }
 
 </style>
-<!--<div id="subdivision">-->
-<!--    <input type="range" min="1" max="120" value="1">-->
-<!--    <output name="subdivision"></output>-->
-<!--</div>-->
-<div id="faces">
+
+<body>
+<div id="year">
+    <input type="range" min="2002" max="2021" value="1">
+    <output name="year"></output>
+</div>
+<div id="body">
 <!--    <input type="radio" name="polyhedron" value="tetrahedron">tetrahedron<br>-->
 <!--    <input type="radio" name="polyhedron" value="icosahedron" checked="checked">icosahedron<br>-->
-    <output name="faces"></output>
+<!--    <output name="Title"></output>-->
 </div>
 
 <script src="//d3js.org/d3.v4.min.js"></script>
 <!-- <script src="d3.min.js"></script> -->
 <script src="d3.geodesic.js"></script>
-<script>
-
-    const width = 960,
-        height = 500;
-
-    const velocity = [.010, .005],
-        t0 = Date.now();
-
-    const projection = d3.geoOrthographic()
-        .scale(height / 2 - 10);
-
-    const canvas = d3.select("body").append("canvas")
-        .attr("width", width)
-        .attr("height", height);
-
-    const context = canvas.node().getContext("2d");
-
-    context.strokeStyle = "#000";
-    context.lineWidth = .5;
-
-    let faces;
-
-    const output = d3.select("output");
-    const subdivision = 26;
-
-    // var input_subdivision = d3.select("#subdivision input")
-    //     .on("change", function() {
-    //         subdivision = +this.value;
-    //         geodesic(subdivision);
-    //     })
-    //     .each(function() {
-    //         subdivision = +this.value;
-    //         geodesic(subdivision);
-    //     });
-
-    geodesic(subdivision);
-
-    d3.timer(function() {
-        const time = Date.now() - t0;
-        projection.rotate([time * velocity[0], time * velocity[1]]);
-        redraw();
-    });
-
-    function redraw() {
-        context.clearRect(0, 0, width, height);
-
-        faces.forEach(function(d) {
-            d.polygon[0] = projection(d[0]);
-            d.polygon[1] = projection(d[1]);
-            d.polygon[2] = projection(d[2]);
-            if (d.visible = d3.polygonArea(d.polygon) > 0) {
-                context.fillStyle = d.fill;
-                context.beginPath();
-                drawTriangle(d.polygon);
-                context.fill();
-            }
-        });
-
-        context.beginPath();
-        faces.forEach(function(d) {
-            if (d.visible) {
-                drawTriangle(d.polygon);
-            }
-        });
-        context.stroke();
-    }
-
-    function drawTriangle(triangle) {
-        context.moveTo(triangle[0][0], triangle[0][1]);
-        context.lineTo(triangle[1][0], triangle[1][1]);
-        context.lineTo(triangle[2][0], triangle[2][1]);
-        context.closePath();
-    }
-
-    function geodesic(subdivision) {
-        const polyhedron = d3.icosahedron;
-
-        // Color scheme light -
-        const assessedArr = Array(56).fill("mediumorchid").concat(
-            Array(5625).fill("forestgreen"),
-            Array(2576).fill("skyblue"),
-            Array(5580).fill("khaki")
-        );
-
-        // Color scheme dark -
-        // var assessedPr = Array(56).fill("magenta").concat(
-        //     Array(5625).fill("orangered"),
-        //     Array(2576).fill("darkred"),
-        //     Array(5580).fill("crimson")
-        // )
-
-        faces = polyhedron.polygons(subdivision).map(function(d) {
-            d = d.coordinates[0];
-            d.pop(); // use an open polygon
-            //d.fill = d3.hsl(d[0][0], 1, .5) + "";
-            //d.fill = d3.hsl(Math.random() * 360, 1, .5) + "";
-            d.fill = assessedArr[Math.floor(Math.random()*assessedArr.length)];
-            d.polygon = d.map(projection);
-            return d;
-        });
-        output.text("Total Faces =" + faces.length + ", Subdivision =" + subdivision);
-        redraw();
-    }
-
-</script>
+<script src="versor.js"></script>
+<script src="bucky.js"></script>
+</body>
