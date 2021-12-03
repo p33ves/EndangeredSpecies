@@ -316,10 +316,12 @@ var input_year = d3
   .on("change", function () {
     year = +this.value;
     geodesic(year);
+    Plot(year);
   })
   .each(function () {
     year = +this.value;
     geodesic(year);
+    Plot(year);
   });
 
 geodesic(year);

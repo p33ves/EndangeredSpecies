@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
+<head>
 <style>
 
+    body{
+        display: grid;
+    justify-items: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    }
 
-    #body {
+
+    /* #body {
         position: absolute;
         top: 60px;
         left: 20px;
-    }
+    } */
 
     #year input {
         width: 200px;
@@ -19,22 +28,36 @@
         left: 20px;
     }
 
+
+    #chart{
+        transform: rotate(
+180deg);
+    }
+
+
 </style>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Norican&family=Open+Sans:wght@300;400;600&family=Poppins&display=swap" rel="stylesheet">
+</head>
+
 <body>
+
 <div id="year">
     <input type="range" min="2002" max="2021" value="1">
     <output name="year"></output>
 </div>
 
 
-<div id="chart" style="height:600px;width:600px">
-    <div class="innerCont" style="overflow: auto; top:100px; left: 400px; height:91% ; Width:100% ;position: relative;overflow: hidden;"></div>
-</div>
+
 <div id="body">
 <!--    <input type="radio" name="polyhedron" value="tetrahedron">tetrahedron<br>-->
 <!--    <input type="radio" name="polyhedron" value="icosahedron" checked="checked">icosahedron<br>-->
 <!--    <output name="Title"></output>-->
+</div>
+<div id="chart" style="height:600px;width:600px">
+    <div class="innerCont" style="overflow: auto; top:100px; left: 400px; height:91% ; Width:100% ;overflow: hidden;"></div>
 </div>
 
 
@@ -50,9 +73,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
+<script src="barv4.js"></script>
 <script src="d3.geodesic.js"></script>
 <script src="versor.js"></script>
 <script src="bucky.js"></script>
-<script src="barv4.js"></script>
+
 
 </body>
