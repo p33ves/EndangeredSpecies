@@ -12,6 +12,7 @@
       justify-content: center;
     }
 
+
     body {
       display: flex;
       min-height: 100vh;
@@ -31,7 +32,17 @@
     } */
 
     #year input {
+      position: absolute;
+      top: 20px;
       width: 200px;
+      left: 40;
+    }
+    #year output {
+      position: absolute;
+      top: 40px;
+      width: 300px;
+      white-space: pre-wrap;
+      left: -40;
     }
 
     #polyhedrontype {
@@ -42,6 +53,10 @@
 
     #chart {
       transform: rotate(90deg);
+    }
+
+    .axis { 
+      font: 14px sans-serif; 
     }
     
 
@@ -62,7 +77,8 @@
     <div class="layout">
       <div id="year">
         <input type="range" min="2002" max="2021" value="1" />
-        <output name="Current year"></output>
+        <a></a>
+        <output name="Summary"></output>
       </div>
     <div class="disc">
       <div id="body"></div>

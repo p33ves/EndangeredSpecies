@@ -18,16 +18,14 @@ var input_year = d3
 function showOutput(year, at) {
   let yearOutput = d3.select("output");
   if (year == 2005) {
-    yearOutput.text("Year = " + year + "\n" + " No Data was found!");
+    yearOutput.text("\nYear = " + year + "\n" + " No Data Found!");
   } else {
     yearOutput.text(
-      "Year = " +
+      "\nYear = " +
         year +
-        " \n " +
-        "Total Species Assessed = " +
+        " \nTotal Species Assessed = " +
         at[0] +
-        " \n " +
-        "Total Species Threatened = " +
+        " \nTotal Species Threatened = " +
         at[1]
     );
   }
