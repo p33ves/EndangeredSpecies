@@ -117,7 +117,68 @@ function geodesic(year, selectBar) {
     threatened,
   });
 
-  // let colorArray = selectBar == null ? Array(+fungii)
+  let colorArray =
+    selectBar == "Plants"
+      ? Array(+fungii)
+          .fill("white")
+          .concat(
+            Array(+black_f).fill("white"),
+            Array(+plants).fill("forestgreen"),
+            Array(+black_p).fill("black"),
+            Array(+inver).fill("white"),
+            Array(+black_i).fill("white"),
+            Array(+ver).fill("white"),
+            Array(+black_v).fill("white")
+          )
+      : selectBar == "Vertebrates"
+      ? Array(+fungii)
+          .fill("white")
+          .concat(
+            Array(+black_f).fill("white"),
+            Array(+plants).fill("white"),
+            Array(+black_p).fill("white"),
+            Array(+inver).fill("white"),
+            Array(+black_i).fill("white"),
+            Array(+ver).fill("darkkhaki"),
+            Array(+black_v).fill("black")
+          )
+      : selectBar == "Invertebrates"
+      ? Array(+fungii)
+          .fill("white")
+          .concat(
+            Array(+black_f).fill("white"),
+            Array(+plants).fill("white"),
+            Array(+black_p).fill("white"),
+            Array(+inver).fill("dodgerblue"),
+            Array(+black_i).fill("black"),
+            Array(+ver).fill("white"),
+            Array(+black_v).fill("white")
+          )
+      : selectBar == "Fungi & protists"
+      ? Array(+fungii)
+          .fill("orchid")
+          .concat(
+            Array(+black_f).fill("black"),
+            Array(+plants).fill("white"),
+            Array(+black_p).fill("white"),
+            Array(+inver).fill("white"),
+            Array(+black_i).fill("white"),
+            Array(+ver).fill("white"),
+            Array(+black_v).fill("white")
+          )
+      : Array(+fungii)
+          .fill("mediumorchid")
+          .concat(
+            Array(+black_f).fill("black"),
+            Array(+plants).fill("forestgreen"),
+            Array(+black_p).fill("black"),
+            Array(+inver).fill("skyblue"),
+            Array(+black_i).fill("black"),
+            Array(+ver).fill("khaki"),
+            Array(+black_v).fill("black")
+          );
+
+  // let colorArray = Array(+fungii)
   //   .fill("mediumorchid")
   //   .concat(
   //     Array(+black_f).fill("black"),
@@ -127,20 +188,7 @@ function geodesic(year, selectBar) {
   //     Array(+black_i).fill("black"),
   //     Array(+ver).fill("khaki"),
   //     Array(+black_v).fill("black")
-  //   ) :
-  //   selectBar == ;
-
-  let colorArray = Array(+fungii)
-    .fill("mediumorchid")
-    .concat(
-      Array(+black_f).fill("black"),
-      Array(+plants).fill("forestgreen"),
-      Array(+black_p).fill("black"),
-      Array(+inver).fill("skyblue"),
-      Array(+black_i).fill("black"),
-      Array(+ver).fill("khaki"),
-      Array(+black_v).fill("black")
-    );
+  //   );
 
   faces = polyhedron.polygons(subdivision).map(function (d) {
     d = d.coordinates[0];

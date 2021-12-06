@@ -140,8 +140,6 @@ function BuildBar(id, chartData, options, level) {
     .on("click", function (d) {
       if (this._listenToEvents) {
         // Reset immediatelly
-        console.log(this);
-        geodesic(year, null);
         d3.select(this).attr("transform", "translate(0,0)");
         // Change level on click if no transition has started
         path.each(function () {
@@ -152,7 +150,9 @@ function BuildBar(id, chartData, options, level) {
       if (level == 1) {
         TransformChartData(chartData, options, 0, d[xVarName]);
         BuildBar(id, chartData, options, 0);
+        geodesic(year, null);
       } else {
+        geodesic(year, d[xVarName]);
         var nonSortedChart = chartData.sort(function (a, b) {
           return (
             parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis])
