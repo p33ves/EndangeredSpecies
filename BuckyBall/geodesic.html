@@ -3,6 +3,7 @@
 
 <head>
   <style>
+    
     div.layout {
       display: flex;
       font-family: "Poppins", sans-serif;
@@ -58,13 +59,12 @@
 </head>
 
 <body>
-  <div class="layout">
-    <div class="disc">
+    <div class="layout">
       <div id="year">
         <input type="range" min="2002" max="2021" value="1" />
-        <output name="year"></output>
+        <output name="Current year"></output>
       </div>
-
+    <div class="disc">
       <div id="body"></div>
     </div>
 
@@ -93,13 +93,16 @@
     src="https://code.jquery.com/jquery-1.12.4.min.js"
     charset="utf-8"
   ></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script> -->
   <script src="https://d3js.org/d3.v4.min.js"></script>
 
-  <script src="bar.js"></script>
-  <script src="d3.geodesic.js"></script>
-  <script src="versor.js"></script>
-  <script src="bucky.js"></script>
+  <script src="./data/threatenedSpecies.js"></script>
+  <script src="./data/balldata.js"></script>
+  <script src="./src/d3.geodesic.js"></script>
+  <!-- <script src="./src/versor.js"></script> -->
+  <script src="./src/bucky.js"></script>
+  <script src="./src/bar.js"></script>
+  <script src="./src/yearselect.js"></script>
 </body>
 
 
