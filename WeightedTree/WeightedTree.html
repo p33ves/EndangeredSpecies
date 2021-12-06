@@ -19,25 +19,48 @@
 
 <body>
 
-<button onclick="viz.update(true)">Expand all</button>
+
 
 <!-- Our main content container-->
 <div class="container" style="width:100% ">
     <div id="viz_container" class="z-depth-3" style="width:900px; height:900px;">
-    </div>
+		<!--<div id=info style="position:fixed; right:10px; width:15%; height:100%;"></div> !-->
+<button style="appearance: button; background-color: #436edb;
+	margin: 2px;
+  border: 1px solid #022785;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Graphik,-apple-system,system-ui,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell;
+  font-size: 14px;
+  line-height: 1.15;
+  overflow: visible;
+  padding: 12px 16px;
+  position: absolute;
+  z-index:1;
+  text-align: center;
+  text-transform: none;
+  transition: all 80ms ease-in-out;
+  touch-action: manipulation;
+  width: fit-content;"
+onclick="viz.update(true)">Expand all</button>
+	</div>
 </div>
-<div style="position:absolute; bottom:10px; left:10px; font-size:10px; color:#777"><span>v.</span> 2.1.220 - @date</div>
+<div style="position:absolute; bottom:10px; left:10px; font-size:10px; color:rgb(131, 131, 131)"><span>v.</span> 2.1.220 - @date</div>
 
 <script>
-
 var oceanStyles = {
-	'background-color-top': '#021F51',
-	'background-color-bottom': '#039FDB',
+	//'background-color-top': '#001F51',
+	'background-color-top': 'rgb(131, 131, 131)',
+	'background-color-top': '#4d4d4',
+	//'background-color-bottom': '#039FDB',
 	'label-color': '#FFF',
 	'label-fill-opacity': 1,
 	'link-stroke': function (d, i) {
 		//return '#FFF'
-		var colors = ["#FFA000", "#FF5722", "#F57C00", "#FF9800", "#FFEB3B"];
+		//var colors = ["#FFA000", "#FF5722", "#F57C00", "#FF9800", "#FFEB3B"];
+		var colors = ["darkkhaki", "dodgerblue", "darkgreen", "orchid"];
 		if (d.target.data.Category) {
 			if (d.target.data.Category == "Threatened") {
 				//console.log(d);
@@ -52,14 +75,11 @@ var oceanStyles = {
 	'node-stroke-opacity': 1,
 	'node-fill': function (d, i) {
 		//return '#FFF'
-		var colors = ["#C50A0A", "#C2185B", "#F57C00", "#FF9800", "#FFEB3B"];
-		if (d.data.Category) {
-			if (d.data.Category == "Threatened") {
-			//
-			return '#FF0000';
-			}
-		}
+		//var colors = ["#C50A0A", "#C2185B", "#F57C00", "#FF9800", "#FFEB3B"];
+		var colors = ["darkkhaki", "dodgerblue", "darkgreen", "orchid"];
 //		return '#FFF'; // solid color
+		console.log(d.data.key)
+		console.log(d.rootIndex % colors.length);
 		return colors[d.rootIndex % colors.length];
 	},
 	'node-fill-opacity': .7
@@ -77,18 +97,19 @@ var oceanStyles = {
 	 .key(function (d) { return d.key || d.Category; })
 	 .value(function (d) {
 		 var ret = Number(d.TotalEvaluated || d.Total)
-		 if (isNaN(ret)) {
+		 /*if (isNaN(ret)) {
 		 	if (d.children) { 
 			 if (display == "evaluated") {
 			 	console.log("eval");
-			 	return d.children[1].Total * 10; 
+			 	return d.children[1].Total; 
 			 } else {
 			 	console.log("estim");
-				return d.children[0].Total * 10;
+				return d.children[0].Total;
 			 }
 			 // use TotalEstimated from child
 		 	}
-		 }
+		 } */
+		 
 		 //return Number(5000);
 		 return isNaN(ret) ? 0 : ret;
 	 })
@@ -107,7 +128,7 @@ var oceanStyles = {
 			 // use TotalEstimated from child
 		 	}
 		 }
-	 	return trimLabel(d.key || (d.Category)) + " (" + num + ")"})
+	 	return trimLabel(d.key || (d.Category)) + " (" + formatValue(num) + ")"})
 	 .dataTipLabel(function (d) { return d.key || d.Category })
 	 .useZoomToNode(true)
 	 .useZoom(true)
@@ -118,10 +139,48 @@ var oceanStyles = {
 	viz.update();
 	changeStyles('oceanStyles');
 
+// background image
+
+//	d3.select('rect.vz-background')
+//	.style('fill', 'darkgrey');
+/*
+	var svg = d3.select("svg.vizuly");
+	var defs = svg.select('defs');
+	defs.append('pattern')
+   .attr('id', 'pic1')
+   .attr('patternUnits', 'userSpaceOnUse')
+   .attr('width', 1024)
+   .attr('height', 768)
+   .append('image')
+   .attr('href', 'bg.jpg')
+   .attr("width", 1024)
+   .attr("height", 768)
+   .attr("x", 0)
+   .attr("y", 0);
+
+	d3.select('rect.vz-background')
+   .attr("d", "M 0,0, 57.7,-768, 1024,0z")
+   .attr("transform", "translate(1024, 768)")
+   .attr("fill", "url(#pic1)");
+*/
+	// info box
+	d3.select("div.vz-weighted_tree-viz")
+	.style('position', 'relative')
+	.append('div')
+	.attr('id', 'info')
+	.style('position', 'absolute')
+	.style('right', '0')
+	.style('top', '0')
+	.style('width', '20%')
+	.style('height', '100%');
+	//<!--<div id=info style="position:fixed; right:10px; width:15%; height:100%;"></div> !-->
 	// format sums
 	function formatValue (d) {
 		if (isNaN(d)) d = 0;
-		return d3.format("d")(d) + " Species";
+		if (d < 1) {
+			var d = 0;
+		}
+		return d3.format("d")(d);
 	};
 
 	// trim node labels
@@ -131,10 +190,48 @@ var oceanStyles = {
 
 	function onMouseOver(e, d, i) {
 		console.log("onMouseOver " + display);
+		//console.log(e);
+		//console.log(d);
+		//console.log(i);
+		//const rand = d3.randomUniform(1, 100);
+		if (d.depth == 2) {
+			if (d._children) {
+				var iucn_eval = d._children[1].data.Total;
+				var tot = Number(d._children[0].data.Total) + Number(d._children[1].data.Total);
+				console.log("TOT:" + tot);
+				var perc = Number(d._children[0].data.Total) / tot;
+				console.log("PERC:" + perc);
+			} else {
+				// or _children if not expanded
+				var iucn_eval = d.children[1].data.Total;
+				var tot = Number(d.children[0].data.Total) + Number(d.children[1].data.Total);
+				var perc = Number(d.children[0].data.Total) / tot;
+			}
+			d3.select('div #info').append("h3").attr('class', 'infobox');
+			//d3.select('h3 #infobox').node()
+			d3.select('.infobox')
+			//: d3.select('div #info').append("h3").attr('id', 'infobox')
+    		.html('Missing data: <b>' + d3.format(",.1%")(perc) + '</b><br><br>' +
+			'Total Species: ' + tot + '<br><br>' +
+			'Evaluated Species: ' + iucn_eval
+			)
+			.style('font-size', function (d,i) { return viz.getStyle('label-font-size', arguments)  + 'px'})
+			.style('font-family', function (d,i) { return viz.getStyle('label-font-family', arguments) })
+			.style('font-weight', function (d,i) { return viz.getStyle('label-font-weight', arguments) })
+			.style('text-transform', function (d,i) { return viz.getStyle('label-text-transform', arguments) })
+			.style('fill', function (d,i) { return viz.getStyle('label-color', arguments) })
+			.style('fill-opacity', function (d,i) { return viz.getStyle('label-fill-opacity', arguments) })
+			.style('background', 'rgba(255,255,255, 0.9)')
+			.style('padding', '10px')
+			//.append("br")
+			//.text('Assessed: ' + d3.format(",.1%")(perc));
+			
+		}
 	}
 
 	function onMouseOut(e, d, i) {
 		console.log("onMouseOut " + d.data.Category)
+		//d3.select('div #info').select('h3').remove();
 	}
 
 	//We can capture click events and respond to them

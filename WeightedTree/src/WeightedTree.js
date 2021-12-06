@@ -140,12 +140,12 @@ vizuly2.viz.WeightedTree = function (parent) {
 		 * @member {Number}
 		 * @default 'auto'
 		 */
-		'maxNodeRadius': '50',
+		'maxNodeRadius': '100',
 		/** EDITED
 		 * Determines horizontal node spacing as a fixed pixel amount.  A value of 'auto' will automatically determine horizontalPadding based on
 		 * component measurements.
 		 * @member {Number}
-		 * @default 'auto'
+		 * @default '50'
 		 */
 		'horizontalPadding': 'auto',
 		/**
@@ -340,7 +340,7 @@ vizuly2.viz.WeightedTree = function (parent) {
 	
 	//Measurements
 	var tree = scope.tree;                  // Tree layout
-	var nodeScale = d3.scaleSqrt();        // Scale used for node radius
+	var nodeScale = d3.scalePow();        // Scale used for node radius
 	var root, rootAncestors, nodes;         // Data storage for display tree
 	var depthSpan;                          // Width to use for horizontal span - can be fixed (scope.horizontalPadding) or dynamically sized by viz.width
 	var maxDepth;                           // Deepest level of tree
@@ -360,10 +360,16 @@ vizuly2.viz.WeightedTree = function (parent) {
 		if (node.depth == 0 || !node.data) {
 			r = nodeScale.range()[1] / 2;
 		}
-		else {
-			nodeScale.domain([minValues[node.depth], maxValues[node.depth]]);
-			r = nodeScale(scope.value(node.data));
-		}
+//		console.log("node depth" + node.depth);
+
+		nodeScale.domain([minValues[node.depth], maxValues[node.depth]]);
+	
+		r = nodeScale(scope.value(node.data));
+//		console.log(node.data.key);
+//		console.log("min" + minValues[node.depth]);
+//		console.log("max" + maxValues[node.depth]);
+//		console.log("r" + r);
+		
 		return isNaN(r) ? 0 : r;
 	}
 	
@@ -470,7 +476,9 @@ vizuly2.viz.WeightedTree = function (parent) {
 			});
 			
 			minValues[i] = d3.min(vals, function (d) {
-				return scope.value(d.data)
+//				if (scope.value(d.data) > 0) {
+					return scope.value(d.data)
+//				}
 			});
 		}
 		
@@ -572,8 +580,8 @@ vizuly2.viz.WeightedTree = function (parent) {
 		
 		
 		// Update the nodes…
-		//var node = nodePlot.selectAll('.vz-weighted_tree-node')
-		var node = nodePlot.selectAll("#cssSPECIES_cssINVERTEBRATES_cssINSECTS_cssDESCRIBED")
+		var node = nodePlot.selectAll('.vz-weighted_tree-node')
+		//var node = nodePlot.selectAll("#cssSPECIES_cssINVERTEBRATES_cssINSECTS_cssDESCRIBED")
 		 .data(nodes, function (d) {
 		 	 console.log(d.id);
 			 return d.id || (d.id = scope.key(d.data));
@@ -628,8 +636,8 @@ vizuly2.viz.WeightedTree = function (parent) {
 		
 		// sets radius for new circles
 		//nodeUpdate.select('circle')
-		console.log(rootNode.id);
-		console.log('g.vz-id-' + rootNode.id);
+//		console.log(rootNode.id);
+//		console.log('g.vz-id-' + rootNode.id);
 		rootNode.selectAll('circle')
 		 //.attr('r', nodeRadius)
 		 .attr('r', 30)
@@ -1013,6 +1021,9 @@ vizuly2.viz.WeightedTree = function (parent) {
 		
 		var styles_backgroundGradient = vizuly2.svg.gradient.blend(viz, viz.getStyle('background-color-bottom'), viz.getStyle('background-color-top'));
 		
+		var width = 800;
+var height = 200;
+
 		// Update the background
 		selection.selectAll('.vz-background').style('fill', function () {
 			 return 'url(#' + styles_backgroundGradient.attr('id') + ')';
@@ -1059,7 +1070,7 @@ vizuly2.viz.WeightedTree = function (parent) {
 		 .style('cursor', function (d) {
 			 return (d.children || d._children) ? 'pointer' : 'auto'
 		 })
-		viz.showDataTip(e,d,i);
+		//viz.showDataTip(e,d,i);
 	}
 	
 	//On **mouseout** we want to undo any changes we made on the mouseover callback.

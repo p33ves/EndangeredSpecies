@@ -5,33 +5,32 @@ var data = [
       {
         "Category": "Mammals",
         "values": [     
-              {
-                "Category": "Estimated",
-                "Level1": "Vertebrates",
-                "Level2": "Mammals",
-                "Level3": "Estimated",
-                "Total": "6554",
-              },
-              {
-                "Category": "Evaluated",
-                "Level1": "Vertebrates",
-                "Level2": "Mammals",
-                "Level3": "Evaluated",
-                "Total": "5954",
-              },
+          {
+            "Category": "Undocumented",
+            "Level1": "Vertebrates",
+            "Level2": "Mammals",
+            "Level3": "Undocumented",
+            "Total": "600",
+          }, 
+          {
+            "Category": "Evaluated",
+            "Level1": "Vertebrates",
+            "Level2": "Mammals",
+            "Level3": "Evaluated",
+            "Total": "5954",
+          },   
         ],
-//        "TotalEvaluated": 5954,
-//        "TotalEvaluated": 5954,
+        "TotalEvaluated": 6554,
       },
       {
         "Category": "Birds",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "Vertebrates",
                 "Level2": "Birds",
-                "Level3": "Estimated",
-                "Total": "11158",
+                "Level3": "Undocumented",
+                "Total": "0.01",
               },
               {
                 "Category": "Evaluated",
@@ -47,11 +46,11 @@ var data = [
         "key": "Reptiles",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "Vertebrates",
                 "Level2": "Reptiles",
-                "Level3": "Estimated",
-                "Total": "11570",
+                "Level3": "Undocumented",
+                "Total": "2438",
               },
               {
                 "Category": "Evaluated",
@@ -61,17 +60,17 @@ var data = [
                 "Total": "9132",
               },
         ],
-        "TotalEvaluated": 9132
+        "TotalEvaluated": 11570
       },
       {
         "key": "Amphibians",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "Vertebrates",
                 "Level2": "Mammals",
-                "Level3": "Estimated",
-                "Total": "8361",
+                "Level3": "Undocumented",
+                "Total": "1146",
               },
               {
                 "Category": "Evaluated",
@@ -81,17 +80,17 @@ var data = [
                 "Total": "7215",
               },
         ],
-        "TotalEvaluated": 7215
+        "TotalEvaluated": 8361
       },
       {
         "key": "Fishes",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "Vertebrates",
                 "Level2": "Fishes",
-                "Level3": "Estimated",
-                "Total": "35934",
+                "Level3": "Undocumented",
+                "Total": "13585",
               },
               {
                 "Category": "Evaluated",
@@ -101,10 +100,10 @@ var data = [
                 "Total": "22349",
               },
         ],
-        "TotalEvaluated": 22349,
+        "TotalEvaluated": 35934,
       },
     ],
-    "TotalEvaluated": 55808
+    "TotalEvaluated": 73577
   },
   {
     "key": "INVERTEBRATES",
@@ -113,11 +112,11 @@ var data = [
         "key": "Insects",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "INVERTEBRATES",
                 "Level2": "Insects",
-                "Level3": "Estimated",
-                "Total": "1053578",
+                "Level3": "Undocumented",
+                "Total": "1042098",
               },
               {
                 "Category": "Evaluated",
@@ -128,17 +127,17 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 11480,
+        "TotalEvaluated": 1053578,
       },
       {
         "key": "Molluscs",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "INVERTEBRATES",
                 "Level2": "Molluscs",
-                "Level3": "Estimated",
-                "Total": "83125",
+                "Level3": "Undocumented",
+                "Total": "74191",
               },
               {
                 "Category": "Evaluated",
@@ -148,17 +147,17 @@ var data = [
                 "Total": "8934",
               },
         ],
-        "TotalEvaluated": 8934
+        "TotalEvaluated": 83125
       },
       {
         "key": "Crustaceans",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "INVERTEBRATES",
                 "Level2": "Crustaceans",
-                "Level3": "Estimated",
-                "Total": "80604",
+                "Level3": "Undocumented",
+                "Total": "77415",
               },
               {
                 "Category": "Evaluated",
@@ -169,17 +168,17 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 3189,
+        "TotalEvaluated": 80604,
       },
       {
         "key": "Corals",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "INVERTEBRATES",
                 "Level2": "Corals",
-                "Level3": "Estimated",
-                "Total": "5351",
+                "Level3": "Undocumented",
+                "Total": "4488",
               },
               {
                 "Category": "Evaluated",
@@ -190,17 +189,17 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 863,
+        "TotalEvaluated": 5351,
       },
       {
         "key": "Arachnids",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "INVERTEBRATES",
                 "Level2": "Arachnids",
-                "Level3": "Estimated",
-                "Total": "110615",
+                "Level3": "Undocumented",
+                "Total": "110222",
               },
               {
                 "Category": "Evaluated",
@@ -211,17 +210,17 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 393,
+        "TotalEvaluated": 110615,
       },
       {
         "key": "Velvet",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "INVERTEBRATES",
                 "Level2": "Velvet",
-                "Level3": "Estimated",
-                "Total": "228",
+                "Level3": "Undocumented",
+                "Total": "217",
               },
               {
                 "Category": "Evaluated",
@@ -232,17 +231,17 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 11,
+        "TotalEvaluated": 228,
       },
       {
         "key": "Horseshoe",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "INVERTEBRATES",
                 "Level2": "Horseshoe",
-                "Level3": "Estimated",
-                "Total": "4",
+                "Level3": "Undocumented",
+                "Total": "0.01",
               },
               {
                 "Category": "Evaluated",
@@ -259,11 +258,11 @@ var data = [
         "key": "Others",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "INVERTEBRATES",
                 "Level2": "Others",
-                "Level3": "Estimated",
-                "Total": "157543",
+                "Level3": "Undocumented",
+                "Total": "156656",
               },
               {
                 "Category": "Evaluated",
@@ -274,10 +273,10 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 887,
+        "TotalEvaluated": 157543,
       },
     ],
-    "TotalEvaluated": 25761
+    "TotalEvaluated": 1491048
   },
   {
     "key": "PLANTS",
@@ -286,11 +285,11 @@ var data = [
         "key": "Mosses",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "PLANTS",
                 "Level2": "Mosses",
-                "Level3": "Estimated",
-                "Total": "21925",
+                "Level3": "Undocumented",
+                "Total": "21643",
               },
               {
                 "Category": "Evaluated",
@@ -301,17 +300,17 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 282,
+        "TotalEvaluated": 21925,
       },
       {
         "key": "Ferns",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "PLANTS",
                 "Level2": "Ferns",
-                "Level3": "Estimated",
-                "Total": "11800",
+                "Level3": "Undocumented",
+                "Total": "11072",
               },
               {
                 "Category": "Evaluated",
@@ -322,17 +321,17 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 728,
+        "TotalEvaluated": 11800,
       },
       {
         "key": "Gymnosperms",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "PLANTS",
                 "Level2": "Gymnosperms",
-                "Level3": "Estimated",
-                "Total": "1113",
+                "Level3": "Undocumented",
+                "Total": "97",
               },
               {
                 "Category": "Evaluated",
@@ -343,17 +342,17 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 1016,
+        "TotalEvaluated": 1113,
       },
       {
         "key": "Flowering",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "PLANTS",
                 "Level2": "Flowering",
-                "Level3": "Estimated",
-                "Total": "369000",
+                "Level3": "Undocumented",
+                "Total": "314855",
               },
               {
                 "Category": "Evaluated",
@@ -364,17 +363,17 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 54145,
+        "TotalEvaluated": 369000,
       },
       {
         "key": "Green",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "PLANTS",
                 "Level2": "Green",
-                "Level3": "Estimated",
-                "Total": "11616",
+                "Level3": "Undocumented",
+                "Total": "11600",
               },
               {
                 "Category": "Evaluated",
@@ -385,17 +384,17 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 16,
+        "TotalEvaluated": 11616,
       },
       {
         "key": "Red",
         "values": [     
               {
-                "Category": "Estimated",
+                "Category": "Undocumented",
                 "Level1": "PLANTS",
                 "Level2": "Red",
-                "Level3": "Estimated",
-                "Total": "7291",
+                "Level3": "Undocumented",
+                "Total": "7233",
               },
               {
                 "Category": "Evaluated",
@@ -406,13 +405,13 @@ var data = [
               },
 
         ],
-        "TotalEvaluated": 58,
+        "TotalEvaluated": 7291,
       },
       
       {
       }
     ],
-    "TotalEvaluated": 56245
+    "TotalEvaluated": 422745
   },
   {
     "key": "FUNGI & PROTISTS",
@@ -421,68 +420,68 @@ var data = [
         "key": "Lichens",
         "values": [     
               {
-                "Category": "Estimated",
-                "Level1": "INVERTEBRATES",
-                "Level2": "Insects",
-                "Level3": "Estimated",
-                "Total": "17000",
+                "Category": "Undocumented",
+                "Level1": "FUNGI & PROTISTS",
+                "Level2": "Lichens",
+                "Level3": "Undocumented",
+                "Total": "16924",
               },
               {
                 "Category": "Evaluated",
-                "Level1": "INVERTEBRATES",
-                "Level2": "Insects",
+                "Level1": "FUNGI & PROTISTS",
+                "Level2": "Lichens",
                 "Level3": "Evaluated",
                 "Total": "76",
               },
 
         ],
-        "TotalEvaluated": 76,
+        "TotalEvaluated": 17000,
       },
       {
         "key": "Mushrooms",
         "values": [     
               {
-                "Category": "Estimated",
-                "Level1": "INVERTEBRATES",
-                "Level2": "Insects",
-                "Level3": "Estimated",
-                "Total": "120000",
+                "Category": "Undocumented",
+                "Level1": "FUNGI & PROTISTS",
+                "Level2": "Mushrooms",
+                "Level3": "Undocumented",
+                "Total": "119531",
               },
               {
                 "Category": "Evaluated",
-                "Level1": "INVERTEBRATES",
-                "Level2": "Insects",
+                "Level1": "FUNGI & PROTISTS",
+                "Level2": "Mushrooms",
                 "Level3": "Evaluated",
                 "Total": "469",
               },
 
         ],
-        "TotalEvaluated": 469,
+        "TotalEvaluated": 120000,
       },
       {
         "key": "Brown",
         "values": [     
               {
-                "Category": "Estimated",
-                "Level1": "INVERTEBRATES",
-                "Level2": "Insects",
-                "Level3": "Estimated",
-                "Total": "4317",
+                "Category": "Undocumented",
+                "Level1": "FUNGI & PROTISTS",
+                "Level2": "Brown",
+                "Level3": "Undocumented",
+                "Total": "4302",
               },
               {
                 "Category": "Evaluated",
-                "Level1": "INVERTEBRATES",
-                "Level2": "Insects",
+                "Level1": "FUNGI & PROTISTS",
+                "Level2": "Brown",
                 "Level3": "Evaluated",
                 "Total": "15",
               },
 
         ],
-        "TotalEvaluated": 15,
+        "TotalEvaluated": 4317,
       },
       {
       }
     ],
-    "TotalEvaluated": 560
+    "TotalEvaluated": 141317
   }
 ]
