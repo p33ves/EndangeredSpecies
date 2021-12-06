@@ -180,10 +180,11 @@ function BuildBar(id, chartData, options, level) {
   }),
     bar
       .append("text")
-      .attr("x", x.bandwidth() / 2 + margin.left - 10)
-      .attr("y", function (d) {
-        return y(d[yVarName]) + margin.top - 25;
-      })
+      .attr("x", x.bandwidth() / 4 - 240)
+      // .attr("y", function (d) {
+      //   return height - y(d[yVarName]);
+      // })
+      .attr("y", x.bandwidth() / 2 + margin.left + 10)
       .attr("dy", ".35em")
       .text(function (d) {
         return d[yVarName];
