@@ -18,12 +18,22 @@
 </head>
 
 <body>
-
-
+<style>
+div #intro {
+font-size: 20px;
+padding: 5px;
+font-family: sans-serif;
+}
+</style>
 
 <!-- Our main content container-->
 <div class="container" style="width:100% ">
+
     <div id="viz_container" class="z-depth-3" style="width:900px; height:900px;">
+	<div id="intro">
+		The dendrogram provides an overview of species that have yet to be assessed by the IUCN<br><br>
+		Hover over any species (Arachnids, Ferns, Mushrooms...) for more detail
+	</div>
 		<!--<div id=info style="position:fixed; right:10px; width:15%; height:100%;"></div> !-->
 <button style="appearance: button; background-color: #436edb;
 	margin: 2px;
@@ -47,13 +57,12 @@
 onclick="viz.update(true)">Expand all</button>
 	</div>
 </div>
-<div style="position:absolute; bottom:10px; left:10px; font-size:10px; color:rgb(131, 131, 131)"><span>v.</span> 2.1.220 - @date</div>
 
 <script>
 var oceanStyles = {
-	//'background-color-top': '#001F51',
-	'background-color-top': 'rgb(131, 131, 131)',
-	'background-color-top': '#4d4d4',
+	'background-color-top': '#001F51',
+	//'background-color-top': '#838383',
+	'background-color-bottom': '#4d4d4',
 	//'background-color-bottom': '#039FDB',
 	'label-color': '#FFF',
 	'label-fill-opacity': 1,
@@ -61,12 +70,6 @@ var oceanStyles = {
 		//return '#FFF'
 		//var colors = ["#FFA000", "#FF5722", "#F57C00", "#FF9800", "#FFEB3B"];
 		var colors = ["darkkhaki", "dodgerblue", "darkgreen", "orchid"];
-		if (d.target.data.Category) {
-			if (d.target.data.Category == "Threatened") {
-				//console.log(d);
-				return '#FF0000';
-			}
-		}
 		//return '#FFF0000';
 		return colors[d.target.rootIndex % colors.length];
 	},
@@ -128,7 +131,12 @@ var oceanStyles = {
 			 // use TotalEstimated from child
 		 	}
 		 }
-	 	return trimLabel(d.key || (d.Category)) + " (" + formatValue(num) + ")"})
+		 if (d.key == "Species") {
+			return trimLabel(d.key || (d.Category));
+		 } else {
+	 	    return trimLabel(d.key || (d.Category)) + " (" + formatValue(num) + ")"
+		 }
+	})
 	 .dataTipLabel(function (d) { return d.key || d.Category })
 	 .useZoomToNode(true)
 	 .useZoom(true)
@@ -190,17 +198,11 @@ var oceanStyles = {
 
 	function onMouseOver(e, d, i) {
 		console.log("onMouseOver " + display);
-		//console.log(e);
-		//console.log(d);
-		//console.log(i);
-		//const rand = d3.randomUniform(1, 100);
 		if (d.depth == 2) {
 			if (d._children) {
 				var iucn_eval = d._children[1].data.Total;
 				var tot = Number(d._children[0].data.Total) + Number(d._children[1].data.Total);
-				console.log("TOT:" + tot);
 				var perc = Number(d._children[0].data.Total) / tot;
-				console.log("PERC:" + perc);
 			} else {
 				// or _children if not expanded
 				var iucn_eval = d.children[1].data.Total;
@@ -211,7 +213,7 @@ var oceanStyles = {
 			//d3.select('h3 #infobox').node()
 			d3.select('.infobox')
 			//: d3.select('div #info').append("h3").attr('id', 'infobox')
-    		.html('Missing data: <b>' + d3.format(",.1%")(perc) + '</b><br><br>' +
+    		.html('<b>Unknown status: ' + d3.format(",.1%")(perc) + '</b><br><br>' +
 			'Total Species: ' + tot + '<br><br>' +
 			'Evaluated Species: ' + iucn_eval
 			)
