@@ -103,19 +103,19 @@ function geodesic(year, selectBar) {
     threatened,
   } = balldata.find((data) => data.year === year);
 
-  console.log({
-    year,
-    fungii,
-    black_f,
-    plants,
-    black_p,
-    inver,
-    black_i,
-    ver,
-    black_v,
-    assessed,
-    threatened,
-  });
+  // console.log({
+  //   year,
+  //   fungii,
+  //   black_f,
+  //   plants,
+  //   black_p,
+  //   inver,
+  //   black_i,
+  //   ver,
+  //   black_v,
+  //   assessed,
+  //   threatened,
+  // });
 
   let colorArray =
     selectBar == "Plants"

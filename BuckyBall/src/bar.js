@@ -96,7 +96,7 @@ function BuildBar(id, chartData, options, level) {
   bar
     .append("rect")
     .attr("y", function (d) {
-      return y(d.Total) + margin.top - 15;
+      return y(d.Threatened) + margin.top - 15;
     })
     // .attr("y", height)
     .attr("x", function (d) {
@@ -107,7 +107,7 @@ function BuildBar(id, chartData, options, level) {
         .attr("stroke", "white")
         .attr("stroke-width", 1)
         .attr("y", function (d) {
-          return y(d.Total) + margin.top - 20;
+          return y(d.Threatened) + margin.top - 20;
         })
         .attr("height", function (d) {
           return height - y(d[yVarName]) + 5;
@@ -192,7 +192,14 @@ function BuildBar(id, chartData, options, level) {
       });
 
   bar.append("svg:title").text(function (d) {
-    return d["title"] + " (" + d[yVarName] + ")";
+    return (
+      d["title"] +
+      "- Assessed (" +
+      d.Assessed +
+      "), Threatened (" +
+      d.Threatened +
+      ")"
+    );
   });
 
   chart
@@ -244,21 +251,22 @@ function TransformChartData(chartData, opts, level, filter) {
   var hasMatch;
   var xVarName;
   var yVarName = opts[0].yaxis;
+  var Assessed = opts[0].Assessed;
 
   if (level == 1) {
     xVarName = opts[0].xaxisl1;
-
     for (var i in chartData) {
       hasMatch = false;
       for (var index = 0; index < result.length; ++index) {
         var data = result[index];
-
         if (
           data[xVarName] == chartData[i][xVarName] &&
           chartData[i][opts[0].xaxis] == filter
         ) {
           result[index][yVarName] =
             result[index][yVarName] + chartData[i][yVarName];
+          result[index][Assessed] =
+            result[index][Assessed] + chartData[i][Assessed];
           hasMatch = true;
           break;
         }
@@ -268,6 +276,7 @@ function TransformChartData(chartData, opts, level, filter) {
           ditem = {};
           ditem[xVarName] = chartData[i][xVarName];
           ditem[yVarName] = chartData[i][yVarName];
+          ditem[Assessed] = chartData[i][Assessed];
           ditem["caption"] = chartData[i][xVarName].substring(0, 10) + "...";
           ditem["title"] = chartData[i][xVarName];
           ditem["op"] = 1.0 - parseFloat("0." + result.length);
@@ -281,15 +290,15 @@ function TransformChartData(chartData, opts, level, filter) {
     }
   } else {
     xVarName = opts[0].xaxis;
-
     for (var i in chartData) {
       hasMatch = false;
       for (var index = 0; index < result.length; ++index) {
         var data = result[index];
-
         if (data[xVarName] == chartData[i][xVarName]) {
           result[index][yVarName] =
             result[index][yVarName] + chartData[i][yVarName];
+          result[index][Assessed] =
+            result[index][Assessed] + chartData[i][Assessed];
           hasMatch = true;
           break;
         }
@@ -298,6 +307,7 @@ function TransformChartData(chartData, opts, level, filter) {
         ditem = {};
         ditem[xVarName] = chartData[i][xVarName];
         ditem[yVarName] = chartData[i][yVarName];
+        ditem[Assessed] = chartData[i][Assessed];
         ditem["caption"] =
           opts[0].captions != undefined
             ? opts[0].captions[0][chartData[i][xVarName]]
@@ -308,6 +318,7 @@ function TransformChartData(chartData, opts, level, filter) {
             : "";
         ditem["op"] = 1;
         result.push(ditem);
+        // console.log(ditem);
 
         resultColors[counter] =
           opts[0].color != undefined
@@ -352,6 +363,7 @@ chartOptions = [
     ],
     xaxis: "Kingdom",
     xaxisl1: "Species",
-    yaxis: "Total",
+    yaxis: "Threatened",
+    Assessed: "Assessed",
   },
 ];
