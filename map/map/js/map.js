@@ -370,6 +370,7 @@ function make_map(){
 
   }
 
+  mouseLeave()
   mx_data = Math.max(...data_val[cur_idx])
   mn_data = Math.min(...data_val[cur_idx])
   var scale = d3.scaleLinear()
