@@ -313,7 +313,7 @@ var colorScale = d3.scaleThreshold()
 
 var promises = []
 promises.push(d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"));
-promises.push(d3.csv("https://raw.githubusercontent.com/hwec0112/726project/main/data/t_5.csv", function(d) { 
+promises.push(d3.csv("https://raw.githubusercontent.com/p33ves/EndangeredSpecies/master/map/data/t_5.csv", function(d) { 
                 dkeys = Object.keys(d)
                 for (let i = 0; i < dkeys.length-1; i++){
                   data[i].set(d.Name, d[dkeys[i+1]])
