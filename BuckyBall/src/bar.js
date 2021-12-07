@@ -1,4 +1,4 @@
-var salesData;
+var currentSelection = null;
 var truncLengh = 30;
 $(document).ready(function () {
   Plot();
@@ -10,10 +10,8 @@ function Plot(year = 2002) {
       parseFloat(a[chartOptions[0].yaxis])
     );
   });
-
   TransformChartData(sortedData, chartOptions);
   BuildBar("chart", sortedData, chartOptions);
-
   // console.log("%%%", sortedData);
 }
 
@@ -150,9 +148,9 @@ function BuildBar(id, chartData, options, level) {
       if (level == 1) {
         TransformChartData(chartData, options, 0, d[xVarName]);
         BuildBar(id, chartData, options, 0);
-        geodesic(year, null);
+        currentSelection = null;
       } else {
-        geodesic(year, d[xVarName]);
+        currentSelection = d[xVarName];
         var nonSortedChart = chartData.sort(function (a, b) {
           return (
             parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis])
@@ -165,6 +163,7 @@ function BuildBar(id, chartData, options, level) {
         TransformChartData(chartData, options, 1, d[xVarName]);
         BuildBar(id, chartData, options, 1);
       }
+      geodesic(year, currentSelection);
     });
 
   bar
