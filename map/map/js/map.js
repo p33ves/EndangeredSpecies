@@ -348,7 +348,7 @@ function make_map(){
         d.total = data[cur_idx].get(countryListAlpha3[d.id]) || -1;
         tooltip
             .style("opacity", 0.8)
-            .html(countryListAlpha3[d.id] + ": " + d3.format(",.2r")(d.total))
+            .html(countryListAlpha3[d.id] + " (" + d.id + ") " + ": " + d3.format(",.2r")(d.total))
             .style("left", (d3.event.pageX) + "px")		
             .style("top", (d3.event.pageY - 28) + "px");
       }
@@ -370,6 +370,7 @@ function make_map(){
 
   }
 
+  mouseLeave()
   mx_data = Math.max(...data_val[cur_idx])
   mn_data = Math.min(...data_val[cur_idx])
   var scale = d3.scaleLinear()

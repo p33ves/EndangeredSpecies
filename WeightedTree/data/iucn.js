@@ -1,5 +1,6 @@
 var data = [
   {
+    "TotalEvaluated": 123,
     "Category": "Vertebrates",
     "values": [
       {
@@ -479,9 +480,7 @@ var data = [
         ],
         "TotalEvaluated": 4317,
       },
-      {
-      }
     ],
-    "TotalEvaluated": 141317
+    "TotalEvaluated": 141317,
   }
 ]
