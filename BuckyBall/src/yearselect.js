@@ -4,14 +4,14 @@ var input_year = d3
   .select("#year input")
   .on("change", function () {
     year = +this.value;
-    let at = geodesic(year, null);
     Plot(year);
+    let at = geodesic(year, null);
     showOutput(year, at);
   })
   .each(function () {
     year = +this.value;
-    let at = geodesic(year, null);
     Plot(year);
+    let at = geodesic(year, null);
     showOutput(year, at);
   });
 
