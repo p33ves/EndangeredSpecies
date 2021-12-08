@@ -3,25 +3,14 @@ const width = 960,
 
 const velocity = [0.01, 0.005],
   t0 = Date.now();
-// console.log(d3.geo);
+
 const projection = d3.geoOrthographic().scale(height / 2 - 10);
-// const projection = d3.geo.orthographic().scale(height / 2 - 10);
 
 const canvas = d3
   .select("#body")
   .append("canvas")
   .attr("width", width)
   .attr("height", height);
-
-// canvas.call(d3.drag()
-//     .on("start", dragstarted)
-//     .on("drag", dragged));
-//
-// let render = function () {
-//     },
-//     v0, // Mouse position in Cartesian coordinates at start of drag gesture.
-//     r0, // Projection rotation as Euler angles at start.
-//     q0; // Projection rotation as versor at start.
 
 const context = canvas.node().getContext("2d");
 
@@ -34,21 +23,6 @@ d3.timer(function () {
   projection.rotate([timer * velocity[0], timer * velocity[1]]);
   redraw();
 });
-
-// function dragstarted() {
-//     // timer.stop();
-//     v0 = versor.cartesian(projection.invert(d3.mouse(this)));
-//     r0 = projection.rotate();
-//     q0 = versor(r0);
-// }
-//
-// function dragged() {
-//     const v1 = versor.cartesian(projection.rotate(r0).invert(d3.mouse(this))),
-//         q1 = versor.multiply(q0, versor.delta(v0, v1)),
-//         r1 = versor.rotation(q1);
-//     projection.rotate(r1);
-//     redraw();
-// }
 
 let faces = [];
 
@@ -102,20 +76,6 @@ function geodesic(year, selectBar) {
     assessed,
     threatened,
   } = balldata.find((data) => data.year === year);
-
-  // console.log({
-  //   year,
-  //   fungii,
-  //   black_f,
-  //   plants,
-  //   black_p,
-  //   inver,
-  //   black_i,
-  //   ver,
-  //   black_v,
-  //   assessed,
-  //   threatened,
-  // });
 
   let colorArray =
     selectBar == "Plants"
@@ -177,18 +137,6 @@ function geodesic(year, selectBar) {
             Array(+ver).fill("khaki"),
             Array(+black_v).fill("black")
           );
-
-  // let colorArray = Array(+fungii)
-  //   .fill("mediumorchid")
-  //   .concat(
-  //     Array(+black_f).fill("black"),
-  //     Array(+plants).fill("forestgreen"),
-  //     Array(+black_p).fill("black"),
-  //     Array(+inver).fill("skyblue"),
-  //     Array(+black_i).fill("black"),
-  //     Array(+ver).fill("khaki"),
-  //     Array(+black_v).fill("black")
-  //   );
 
   faces = polyhedron.polygons(subdivision).map(function (d) {
     d = d.coordinates[0];

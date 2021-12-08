@@ -12,7 +12,6 @@ function Plot(year = 2002) {
   });
   TransformChartData(sortedData, chartOptions);
   BuildBar("chart", sortedData, chartOptions);
-  // console.log("%%%", sortedData);
 }
 
 function BuildBar(id, chartData, options, level) {
@@ -157,9 +156,6 @@ function BuildBar(id, chartData, options, level) {
           );
         });
 
-        // console.log("&&&&&", chartData);
-        // TransformChartData(nonSortedChart, options, 1, d[xVarName]);
-        // BuildBar(id, nonSortedChart, options, 1);
         TransformChartData(chartData, options, 1, d[xVarName]);
         BuildBar(id, chartData, options, 1);
       }
@@ -175,16 +171,12 @@ function BuildBar(id, chartData, options, level) {
     })
     .attr("width", x.bandwidth() / 2); //set width base on range on ordinal data;
 
-  //setTimeout( 1000)
   bar.selectAll("rect").style("fill", function (d) {
     return rcolor(d[xVarName]);
   }),
     bar
       .append("text")
       .attr("x", x.bandwidth() / 4 - 240)
-      // .attr("y", function (d) {
-      //   return height - y(d[yVarName]);
-      // })
       .attr("y", x.bandwidth() / 2 + margin.left + 10)
       .attr("dy", ".35em")
       .text(function (d) {
@@ -332,12 +324,6 @@ function TransformChartData(chartData, opts, level, filter) {
 
   runningData = result;
   runningColors = resultColors;
-
-  // chartData = chartData.sort(function (a, b) {
-  //   return parseFloat(b[options[0].yaxis]) - parseFloat(a[options[0].yaxis]);
-  // });
-
-  // console.log("****", chartData);
   return;
 }
 
