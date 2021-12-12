@@ -4,6 +4,3 @@
 
 Instructions for running: Run the file titled 'index.html' following the instructions given in - https://www.wikihow.com/Run-a-HTML-File
 
-### Views
-
-
